@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Note
+from .models import Review, Image
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,8 +14,14 @@ class UserSerializer(serializers.ModelSerializer):
             
         return user
         
-class NoteSerializer(serializers.ModelSerializer):
+class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Note
+        model = Review
         fields = ["id", "title", "content", "created_at", "author"]
+        extra_kwargs = {"author": {"read_only": True}}
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields= ["id", "title", "author", "image", "user"]
         extra_kwargs = {"author": {"read_only": True}}

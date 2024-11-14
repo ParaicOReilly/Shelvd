@@ -14,6 +14,7 @@ from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
 import os
+from corsheaders.defaults import default_headers
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -43,7 +44,7 @@ REST_FRAMEWORK = {
  # access token acess roots
  # refresh token gets a new access token
 SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
 
@@ -90,6 +91,10 @@ TEMPLATES = [
         },
     },
 ]
+
+# CORS_ALLOW_HEADERS = list(default_headers) + [
+#     'Authorization',
+# ]
 
 WSGI_APPLICATION = 'backend.wsgi.application'
 
@@ -146,4 +151,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_CREDENTIALS = True
